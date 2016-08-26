@@ -23,7 +23,7 @@ extension PlaysoundsViewController: AVAudioPlayerDelegate {
     
     // raw values correspond to sender tags
     enum PlayingState { case Playing, NotPlaying }
-
+    
     
     // MARK: Audio Functions
     
@@ -41,7 +41,7 @@ extension PlaysoundsViewController: AVAudioPlayerDelegate {
         
         // initialize audio engine components
         audioEngine = AVAudioEngine()
-                
+        
         // node for playing audio
         audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
@@ -95,7 +95,6 @@ extension PlaysoundsViewController: AVAudioPlayerDelegate {
             
             // schedule a stop timer for when audio finishes playing
             self.stopTimer = NSTimer(timeInterval: delayInSeconds, target: self, selector: #selector(PlaysoundsViewController.stopAudio), userInfo: nil, repeats: false)
-
             NSRunLoop.mainRunLoop().addTimer(self.stopTimer!, forMode: NSDefaultRunLoopMode)
         }
         
@@ -139,10 +138,9 @@ extension PlaysoundsViewController: AVAudioPlayerDelegate {
     
     
     // MARK: UI Functions
-
+    
     func configureUI(playState: PlayingState) {
         switch(playState) {
-        
         case .Playing:
             setPlayButtonsEnabled(false)
             stopbutton.enabled = true
@@ -153,26 +151,19 @@ extension PlaysoundsViewController: AVAudioPlayerDelegate {
     }
     
     func setPlayButtonsEnabled(enabled: Bool) {
-        snailbutton.enabled = enabled
         chipmunkbutton.enabled = enabled
-        rabbitbutton.enabled = enabled
         vaderbutton.enabled = enabled
-        echobutton.enabled = enabled
-        reverbbutton.enabled = enabled
-    }
-
+            }
+    
     
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: Alerts.DismissAlert, style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
-
+    
     
 }
-
-
-
 
 
 

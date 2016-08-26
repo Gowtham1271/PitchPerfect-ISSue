@@ -10,15 +10,10 @@ import UIKit
 import AVFoundation
 
 class PlaysoundsViewController: UIViewController {
-    var recordedAudioURL : NSURL!
     
-    
-    @IBOutlet weak var snailbutton:UIButton!
+   
     @IBOutlet weak var chipmunkbutton:UIButton!
-    @IBOutlet weak var rabbitbutton:UIButton!
     @IBOutlet weak var vaderbutton:UIButton!
-    @IBOutlet weak var echobutton:UIButton!
-    @IBOutlet weak var reverbbutton:UIButton!
     @IBOutlet weak var stopbutton:UIButton!
    
     var recordedAudioURl: NSURL!
@@ -32,6 +27,7 @@ class PlaysoundsViewController: UIViewController {
     @IBAction func playsoundForButton(sender:UIButton){
         
         print("Play Sound Button Pressed")
+        
         switch (ButtonType(rawValue: sender.tag)!) {
         case .slow:
             playSound(rate: 0.5)
@@ -41,8 +37,9 @@ class PlaysoundsViewController: UIViewController {
                 playSound(pitch: 1000)
         case .Vader:
             playSound(pitch: -1000)
-        default: break  }
-       
+                default:
+        playSound()
+        }
         configureUI(.Playing)
     }
     @IBAction func StopButtonPressed(sender:AnyObject){
@@ -59,11 +56,13 @@ class PlaysoundsViewController: UIViewController {
         print("PlaysoundsViewController loaded")
         setupAudio()
 
+  chipmunkbutton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        vaderbutton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         configureUI(.NotPlaying)
       
        
